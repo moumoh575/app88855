@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Connect WhatsApp</title>
+</head>
+<body style="text-align:center; margin-top:100px; font-family:Arial;">
+
+<h2>Connect your WhatsApp Business</h2>
+<p>Link your account to start automating messages.</p>
+
+<button onclick="launchSignup()" style="padding:15px 25px; font-size:18px; background:#25D366; color:white; border:none; border-radius:8px;">
+  Connect WhatsApp
+</button>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '4436833363269286',
+      cookie: true,
+      xfbml: true,
+      version: 'v19.0'
+    });
+  };
+
+  function launchSignup() {
+    FB.login(function(response) {
+      if (response.authResponse) {
+        alert("✅ Connected successfully!");
+        window.location.href = "/success.html";
+      } else {
+        alert("❌ User cancelled login");
+      }
+    }, {
+      config_id: '969445835594223', // مهم جداً
+      response_type: 'code',
+      override_default_response_type: true,
+      extras: {
+        setup: {
+          business: {
+            id: "2195002164302206"
+          }
+        }
+      }
+    });
+  }
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+</body>
+</html>
